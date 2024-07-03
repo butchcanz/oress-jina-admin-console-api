@@ -10,30 +10,18 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post('/register')
-  @ApiCreatedResponse({
-    status: 200,
-    description: 'Created user successfully',
-    type: User
-  })
-  async doUserRegistration(
-    @Body() userRegister: CreateUserDto): Promise<User> {
-      try {
-        const createUser = await this.usersService.create(userRegister);
-        return createUser;
-      } catch (error) {
-        throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
-      }
+  async register(@Body() createUserDto: CreateUserDto) {
+    const result = await this.usersService.register(createUserDto);
+    if (result === false) {
+      return { message: 'Passwords do not match' };
+    }
+    return { message: 'User registered successfully', user: result };
   }
 
   @Get()
   findAll() {
     return this.usersService.findAll();
   }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.usersService.findOne(+id);
-  // }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {

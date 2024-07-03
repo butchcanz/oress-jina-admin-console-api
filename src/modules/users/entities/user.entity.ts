@@ -8,12 +8,12 @@ export class User {
     @Column()
     full_name: string;
 
-    @Column()
+    @Column({ unique: true })
     email: string;
 
     @Column()
     password: string;
 
-    @Column()
+    @Column({ default: false })
     disabled: boolean;
 }

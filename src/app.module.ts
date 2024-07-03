@@ -24,7 +24,7 @@ import typeorm from './config/typeorm';
     UsersModule,
     PdfContentModule,
     UploadModule,
-    AuthModule
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -13,7 +13,7 @@ export class CreateUserDto {
     @ApiProperty()
     confirm_password: string;
 
-    @ApiProperty()
+    @ApiProperty({ default: false })
     disabled: boolean;
 
     
